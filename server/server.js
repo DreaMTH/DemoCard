@@ -1,6 +1,7 @@
 import express from "express";
+import { validationResult } from "express-validator";
 import { userModel } from "./models/userModel.js";
-import { authValidator } from "./validators/auth.js";
+import { userValidator } from "./validators/userValidator.js";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import env from "dotenv";
@@ -17,8 +18,14 @@ app.use(express.json());
 app.get("/", async (req, res) => {
   res.status(200).send("meme2");
 });
-app.post("/auth/reg", async (req, res) => {
-  res.status(200).send("meme3");
+app.post("/auth/reg", userValidator, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json(errors.array());
+  }
+  res.json({
+    success: true,
+  });
 });
 app.listen(PORT || 1337, (err) => {
   if (err) {

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userModel = mongoose.Schema({
+export const userModel = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -14,5 +14,3 @@ const userModel = mongoose.Schema({
     required: true,
   },
 });
-
-export default userModel;
