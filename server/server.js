@@ -4,6 +4,7 @@ import { userModel } from "./models/userModel.js";
 import { userValidator } from "./validators/userValidator.js";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import env from "dotenv";
 env.config();
 const { PORT, DB_PASS } = process.env;
@@ -23,9 +24,15 @@ app.post("/auth/reg", userValidator, async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json(errors.array());
   }
-  res.json({
-    success: true,
+  const salt = await bcrypt.genSalt(10);
+  const password = req.body.password;
+  const hashPassword = await bcrypt.hash(password, salt);
+  const doc = new userModel({
+    email: req.body.email,
+    name: req.body.name,
+    password: hashPassword,
   });
+  res.json(doc);
 });
 app.listen(PORT || 1337, (err) => {
   if (err) {
