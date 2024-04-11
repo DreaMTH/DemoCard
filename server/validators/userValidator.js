@@ -13,4 +13,10 @@ export const userValidator = [
     minNumbers: 1,
     minSymbols: 0,
   }),
+  body("description", "Description field cannot be empty!")
+    .optional()
+    .isLength({ min: 1 }),
+  body("interests", "Interests field cannot be empty")
+    .optional()
+    .isLength({ min: 1 }),
 ];
