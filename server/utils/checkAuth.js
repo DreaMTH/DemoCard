@@ -6,7 +6,7 @@ export default (req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, "token");
-      req.userId = decoded._id;
+      req.userId = decoded.id;
       next();
     } catch (err) {
       console.error(chalk.black.bgRed("ERROR" + new Date()), err);
@@ -14,5 +14,9 @@ export default (req, res, next) => {
         message: "bad auth.",
       });
     }
+  } else {
+    return res.status(400).json({
+      message: "Cannot read token.",
+    });
   }
 };

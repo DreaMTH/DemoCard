@@ -20,3 +20,8 @@ export const userValidator = [
     .optional()
     .isLength({ min: 1 }),
 ];
+
+export const userLoginValidator = [
+  body("email", "Incorrect email adress!").isEmail(),
+  body("password", "Incorrect password").isLength({ min: 8 }),
+];
