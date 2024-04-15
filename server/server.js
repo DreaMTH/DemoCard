@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import env from "dotenv";
 import chalk from "chalk";
 import authRouter from "./routes/auth.js";
-
+import cors from "cors";
 env.config();
 const { PORT, DB_PASS, DB_NAME } = process.env;
 mongoose
@@ -19,6 +19,7 @@ mongoose
   .catch((err) => console.error(`${new Date()} ${err}`));
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use("/auth", authRouter);
 app.get("/", async (req, res) => {
   console.log(req.body);

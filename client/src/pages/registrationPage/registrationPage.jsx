@@ -20,7 +20,12 @@ const RegistrationPage = () => {
           onChange={(e) => onEmailType(e)}
           onClick={(e) => onEmailClick(e)}
         />
+
         <input type="password" />
+        <div>
+          <input type="checkbox" name="save" />
+          <label for="save"> save?</label>
+        </div>
       </div>
     </>
   );

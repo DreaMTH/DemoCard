@@ -1,10 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import HomePage from "./pages/homePage/homePage.jsx";
-import LoginPage from "./pages/loginPage/loginPage.jsx";
 import Header from "./components/header.jsx";
-import RegistrationPage from "./pages/registrationPage/registrationPage.jsx";
-
+import {
+  HomePage,
+  RegistrationPage,
+  LoginPage,
+  UsersPage,
+} from "./pages/pages.js";
 function App() {
   return (
     <>
@@ -13,6 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
+        <Route path="/users" element={<UsersPage />} />
       </Routes>
     </>
   );

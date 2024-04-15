@@ -13,6 +13,9 @@ const Header = () => {
         <Link to="/registration">
           <button className={styles.buttonLink}>Registration</button>
         </Link>
+        <Link to="/users">
+          <button className={styles.buttonLink}>Users</button>
+        </Link>
       </div>
     </>
   );

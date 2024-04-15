@@ -5,6 +5,8 @@
   padding: 1rem 0 0.5rem 0;
   display: flex;
   justify-content: space-evenly;
+  border-bottom: 0.1rem solid hsla(250, 80%, 30%, 0.8);
+  box-shadow: 0rem 0rem 1rem hsla(250, 80%, 60%, 0.8);
 }
 .buttonLink {
   font-family: "Fira Code", monospace;
