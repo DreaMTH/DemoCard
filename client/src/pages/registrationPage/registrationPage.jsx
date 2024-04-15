@@ -3,8 +3,10 @@ import styles from "./registrationPage.module.css";
 
 const RegistrationPage = () => {
   const [defaultInput, setDefaultInput] = useState("youremail@domain.com");
-  const onEmailClick = () => {
-    setDefaultInput("");
+  const onEmailClick = (e) => {
+    if (e.target.value === "youremail@domain.com") {
+      setDefaultInput("");
+    }
   };
   const onEmailType = (e) => {
     setDefaultInput(e.target.value);
@@ -16,7 +18,7 @@ const RegistrationPage = () => {
           type="text"
           value={defaultInput}
           onChange={(e) => onEmailType(e)}
-          onClick={onEmailClick}
+          onClick={(e) => onEmailClick(e)}
         />
         <input type="password" />
       </div>
