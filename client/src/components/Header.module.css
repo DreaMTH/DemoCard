@@ -1,0 +1,14 @@
+.headerBody {
+  margin: 0;
+  background-color: red;
+  padding: 1rem 0 0.5rem 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+.buttonLink {
+  border: 0.2rem solid black;
+  border-radius: 0.5rem;
+}
+.buttonLink:hover {
+  opacity: 70%;
+}
