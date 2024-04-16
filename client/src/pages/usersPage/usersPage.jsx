@@ -1,12 +1,15 @@
 import styles from "./usersPage.module.css";
 import User from "../../components/User.jsx";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from "./usersSlice.js";
 
-import axios from "../../axios.js";
 const UserPage = () => {
+  const { users } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   useEffect(() => {
-    //axios.get("/users");
-  }, []);
+    dispatch(fetchUsers());
+  }, [dispatch]);
   const rndList = Array.from({ length: 10 }, () => ({
     id: "_" + new Date().getMilliseconds + Math.random(0, 10),
   }));
