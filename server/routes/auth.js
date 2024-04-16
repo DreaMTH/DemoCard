@@ -76,7 +76,6 @@ authRouter.post(
 );
 authRouter.get("/profile/me", checkAuth, async (req, res) => {
   try {
-    console.log(req.userId);
     const user = await userModel.findById(req.userId);
     if (!user) {
       return res.status(404).json({

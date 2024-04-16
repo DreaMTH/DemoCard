@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import env from "dotenv";
 import chalk from "chalk";
 import authRouter from "./routes/auth.js";
+import usersRouter from "./routes/users.js";
 import cors from "cors";
 env.config();
 const { PORT, DB_PASS, DB_NAME } = process.env;
@@ -21,6 +22,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("/auth", authRouter);
+app.use("/users", usersRouter);
 app.get("/", async (req, res) => {
   console.log(req.body);
   res.status(200).send("meme2");
