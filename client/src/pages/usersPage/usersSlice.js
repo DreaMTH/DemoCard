@@ -13,19 +13,20 @@ export const usersSlice = createSlice({
     status: "loading",
   },
   reducers: {},
-  extraReducers: {
-    [fetchUsers.pending]: (state) => {
-      state.users = [];
-      state.status = "loading";
-    },
-    [fetchUsers.fulfilled]: (state, action) => {
-      state.users = action.payload;
-      state.status = "ready";
-    },
-    [fetchUsers.rejected]: (state, action) => {
-      state.status = "error";
-      state.users = [];
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUsers.pending, (state) => {
+        state.users = [];
+        state.status = "loading";
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.users = action.payload;
+        state.status = "loaded";
+      })
+      .addCase(fetchUsers.rejected, (state) => {
+        state.status = "error";
+        state.users = [];
+      });
   },
 });
 export const usersReducer = usersSlice.reducer;

@@ -1,15 +1,36 @@
+import { useState } from "react";
 import styles from "./loginPage.module.css";
-import mainLogo from "./logo.png";
-const HomePage = () => {
+const LoginPage = () => {
+  const [emailValue, setEmail] = useState("");
+  const [passwordValue, setPassword] = useState("");
+  const handleLoginEvent = (e) => {
+    e.preventDefault();
+  };
   return (
     <>
       <div className={styles.homeBody}>
-        <h1 className={styles.mainTitle}>welcome to the login page</h1>
-        <img className={styles.logo} src={mainLogo} alt="this is logo" />
-        <p className={styles.mainText}>hi there dear!</p>
+        <form className={styles.formRoot} onSubmit={handleLoginEvent}>
+          <label>Email:</label>
+          <input
+            type="email"
+            required
+            className={styles.inputField}
+            value={emailValue}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <br />
+          <label>Password:</label>
+          <input
+            type="password"
+            required
+            className={styles.inputField}
+            value={passwordValue}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </form>
       </div>
     </>
   );
 };
 
-export default HomePage;
+export default LoginPage;
