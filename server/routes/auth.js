@@ -74,7 +74,7 @@ authRouter.post(
     }
   },
 );
-authRouter.get("/profile/me", checkAuth, async (req, res) => {
+authRouter.get("/me", checkAuth, async (req, res) => {
   try {
     const user = await userModel.findById(req.userId);
     if (!user) {

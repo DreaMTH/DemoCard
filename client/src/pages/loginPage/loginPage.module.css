@@ -1,9 +1,51 @@
 .homeBody {
-  margin: 0;
+  margin: 1rem;
   display: flex;
   justify-content: center;
-  color: hsla(250, 80%, 70%, 0.8);
+}
+.inputSection {
+  margin: 0;
+}
+.inputLabel {
+  display: inline-block;
+  font-weight: 500;
+  color: hsla(250, 80%, 30%, 0.8);
+  font-size: 1rem;
+  background-color: #746565;
+  text-shadow: 0 0 0.2rem white;
+  box-shadow: 0 0 1rem hsla(250, 80%, 30%, 0.8);
+  border: none;
+  height: fit-content;
+  border-radius: 0.2rem;
+  padding: 0.1rem;
 }
 .inputField {
-  margin: 1rem 0 0 1rem;
+  margin-left: 1rem;
+  font-weight: 500;
+  color: hsla(250, 80%, 30%, 0.8);
+  font-size: 1rem;
+  background-color: #746565;
+  text-shadow: 0 0 0.2rem white;
+  box-shadow: 0 0 1rem hsla(250, 80%, 30%, 0.8);
+  border: none;
+  height: fit-content;
+  border-radius: 0.2rem;
+  padding: 0.1rem;
+}
+.submitButton {
+  display: block;
+  margin: auto;
+  font-family: "Fira Code", monospace;
+  font-size: 1rem;
+  color: hsla(250, 80%, 30%, 0.8);
+  text-shadow: 0rem 0rem 0.2rem white;
+  background-color: #746565;
+  border: 0.1rem solid hsla(250, 80%, 70%, 0.8);
+  box-shadow: 0rem 0rem 1rem hsla(250, 80%, 30%, 0.8);
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+.submitButton:hover {
+  opacity: 70%;
+  box-shadow: hsla(250, 80%, 70%, 0.8);
 }
