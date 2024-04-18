@@ -10,6 +10,7 @@ import {
   UsersPage,
 } from "./pages/pages.js";
 import React, { useEffect } from "react";
+import UserPage from "./pages/userPage/userPage";
 function App() {
   const dispatch = useDispatch();
   const authPassed = useSelector(isAuth);
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/users" element={<UsersPage />} />
+        <Route path="/users/:id" element={<UserPage />} />
       </Routes>
     </>
   );

@@ -3,18 +3,32 @@ import User from "../../components/User.jsx";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "./usersSlice.js";
+import { Link } from "react-router-dom";
 
 const UserPage = () => {
   const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.users);
+  let list;
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
-  const rndList = Array.from({ length: 10 }, () => ({
-    id: "_" + new Date().getMilliseconds + Math.random(0, 10),
-  }));
-  const listItems = rndList.map((person) => (
-    <li key={person.id}>
-      <User pfp={person.pfp} name={person.name} email={person.email} />
+  if (!users) {
+    list = Array.from({ length: 10 }, () => ({
+      _id: "_" + new Date().getMilliseconds + Math.random(0, 10),
+    }));
+  } else {
+    list = users;
+  }
+  const listItems = list.map((person) => (
+    <li key={person._id}>
+      <Link to={`/users/${person._id}`}>
+        <User
+          _id={person._id}
+          pfp={person.pfp}
+          name={person.name}
+          email={person.email}
+        />
+      </Link>
     </li>
   ));
   return (
