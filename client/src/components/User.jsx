@@ -1,11 +1,11 @@
 import styles from "./User.module.css";
-
+import logo from "../pages/homePage/logo.png";
 const User = (props) => {
   return (
     <>
       <div className={styles.root}>
         <div className={styles.mainInfo}>
-          <img src={props.pfp} alt="pfp" />
+          <img src={props.pfp??logo} alt="pfp" />
           <div>
             <h3 className={styles.name}>{props.name ?? "null"}</h3>
           </div>

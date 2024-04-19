@@ -5,6 +5,7 @@ import { isAuth, logout } from "../store/auth.js";
 const Header = () => {
   const dispatch = useDispatch();
   const authPassed = useSelector(isAuth);
+  const { data } = useSelector(state => state.auth);
   const logoutEvent = () => {
     if (window.confirm("Do u want to exit?")) {
       dispatch(logout());
@@ -19,6 +20,9 @@ const Header = () => {
         </Link>
         {authPassed ? (
           <>
+            <Link to ={`/users/${data._id}`}>
+              <button className={styles.buttonLink}>My profile</button>
+            </Link>
             <Link to="/users">
               <button className={styles.buttonLink}>Users</button>
             </Link>

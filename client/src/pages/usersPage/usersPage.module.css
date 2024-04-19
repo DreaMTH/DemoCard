@@ -4,3 +4,10 @@
 ul {
   list-style-type: none;
 }
+li {
+  border: 0.1rem solid hsla(250, 80%, 30%, 0.8);
+  opacity: 100%;
+}
+li:hover {
+  opacity: 70%;
+}
