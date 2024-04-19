@@ -6,6 +6,7 @@ import { fetchUsers } from "./usersSlice.js";
 import { Link } from "react-router-dom";
 
 const UserPage = () => {
+  document.title = "Users";
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.users);
   let list;
@@ -21,8 +22,9 @@ const UserPage = () => {
   }
   const listItems = list.map((person) => (
     <li key={person._id}>
-        <Link to={`/users/${person._id}`} style={{textDecoration: 0}}>
+      <Link to={`/users/${person._id}`} style={{ textDecoration: 0 }}>
         <User
+          shortForm={true}
           _id={person._id}
           pfp={person.pfp}
           name={person.name}

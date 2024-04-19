@@ -26,4 +26,31 @@ route.get("/:id", checkAuth, async (req, res) => {
     res.status(200).json(user);
   }
 });
+
+route.post("/updateDescription", checkAuth, async (req, res) => {
+  const user = await userModel.findByIdAndUpdate(req.userId, {
+    description: req.body.description,
+  });
+  if (!user) {
+    return res.status(404).json({ message: "Invalid request" });
+  } else {
+    res.status(200).json({ message: "success" });
+  }
+});
+
+route.post("/updateInterests", checkAuth, async (req, res) => {
+  try {
+    const user = await userModel.findByIdAndUpdate(req.userId, {
+      interests: req.body.interests,
+    });
+    if (!user) {
+      return res.status(404).json({ message: "Invalid request" });
+    } else {
+      res.status(200).json({ message: "successs" });
+    }
+  } catch (err) {
+    return res.status(400).json({ message: "Wrong data" });
+  }
+});
+
 export default route;

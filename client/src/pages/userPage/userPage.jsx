@@ -19,7 +19,9 @@ const UserPage = () => {
       })
       .catch((err) => console.error(err));
   }, []);
-
+  if (!isLoading) {
+    document.title = data.name;
+  }
   if (!authPassed) {
     return (
       <>
@@ -33,7 +35,14 @@ const UserPage = () => {
         {isLoading ? (
           <User id="1" name="loading..." email="loading..." />
         ) : (
-          <User id={data._id} name={data.name} email={data.email} />
+          <User
+            id={data._id}
+            name={data.name}
+            email={data.email}
+            description={data.description ?? ""}
+            interests={data.interests ?? ""}
+            shortForm={false}
+          />
         )}
       </div>
     </>

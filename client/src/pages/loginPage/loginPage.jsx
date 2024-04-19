@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authintificationFetch, isAuth } from "../../store/auth.js";
 import { Navigate } from "react-router-dom";
 const LoginPage = () => {
+  document.title = "Login";
   const authPassed = useSelector(isAuth);
   const dispatch = useDispatch();
   const {

@@ -5,7 +5,7 @@ const User = (props) => {
     <>
       <div className={styles.root}>
         <div className={styles.mainInfo}>
-          <img src={props.pfp??logo} alt="pfp" />
+          <img src={props.pfp ?? logo} alt="pfp" />
           <div>
             <h3 className={styles.name}>{props.name ?? "null"}</h3>
           </div>
@@ -13,6 +13,16 @@ const User = (props) => {
         <div className={styles.addInfo}>
           <p>{props.email ?? "null"}</p>
         </div>
+        {!props.shortForm ? (
+          <>
+            <div className="">
+              <p>{props.description}</p>
+              <h3>{props.interests}</h3>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import styles from "./homePage.module.css";
 import mainLogo from "./logo.png";
 const HomePage = () => {
+  document.title = "Home";
   return (
     <>
       <div className={styles.homeBody}>
