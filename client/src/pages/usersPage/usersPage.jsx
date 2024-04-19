@@ -21,7 +21,7 @@ const UserPage = () => {
   }
   const listItems = list.map((person) => (
     <li key={person._id}>
-      <Link to={`/users/${person._id}`}>
+        <Link to={`/users/${person._id}`} style={{textDecoration: 0}}>
         <User
           _id={person._id}
           pfp={person.pfp}
