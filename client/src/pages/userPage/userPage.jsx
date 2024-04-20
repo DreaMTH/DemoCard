@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import User from "../../components/User";
 const UserPage = () => {
   const authPassed = useSelector(isAuth);
+  const userData = useSelector((state) => state.auth.data);
   const { id } = useParams();
   const [data, setData] = useState();
   const [isLoading, setLoading] = useState(true);
@@ -35,14 +36,23 @@ const UserPage = () => {
         {isLoading ? (
           <User id="1" name="loading..." email="loading..." />
         ) : (
-          <User
-            id={data._id}
-            name={data.name}
-            email={data.email}
-            description={data.description ?? ""}
-            interests={data.interests ?? ""}
-            shortForm={false}
-          />
+          <>
+            <User
+              id={data._id}
+              name={data.name}
+              email={data.email}
+              description={data.description ?? ""}
+              interests={data.interests ?? ""}
+              shortForm={false}
+            />
+            {userData._id === data._id ? (
+              <>
+                <button>Edit profile</button>
+              </>
+            ) : (
+              <></>
+            )}
+          </>
         )}
       </div>
     </>

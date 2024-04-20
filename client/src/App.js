@@ -8,9 +8,9 @@ import {
   RegistrationPage,
   LoginPage,
   UsersPage,
+  UserPage
 } from "./pages/pages.js";
 import React, { useEffect } from "react";
-import UserPage from "./pages/userPage/userPage";
 function App() {
   const dispatch = useDispatch();
   const authPassed = useSelector(isAuth);
