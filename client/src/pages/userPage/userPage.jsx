@@ -5,12 +5,39 @@ import axios from "../../axios.js";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import User from "../../components/User";
+import { useForm } from "react-hook-form";
 const UserPage = () => {
+  const [editMode, setMode] = useState(false);
   const authPassed = useSelector(isAuth);
   const userData = useSelector((state) => state.auth.data);
   const { id } = useParams();
   const [data, setData] = useState();
   const [isLoading, setLoading] = useState(true);
+  const { register, handleSubmit } = useForm({
+    defaultValues: { description: "", interests: "" },
+    mode: "onBlur",
+  });
+  const onSubmit = (values) => {
+    if (!values) return;
+    if (!values.interests || !values.interests.trim())
+      return axios
+        .post("/users/updateDescription", { description: values.description })
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
+    if (!values.description || !values.description.trim())
+      return axios
+        .post("/users/updateInterests", { interests: values.interests })
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
+    axios
+      .post("/users/updateInterests", { interests: values.interests })
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+    axios
+      .post("/users/updateDescription", { description: values.description })
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+  };
   useEffect(() => {
     axios
       .get(`/users/${id}`)
@@ -44,10 +71,42 @@ const UserPage = () => {
               description={data.description ?? ""}
               interests={data.interests ?? ""}
               shortForm={false}
+              editMode={editMode}
             />
             {userData._id === data._id ? (
               <>
-                <button>Edit profile</button>
+                <button
+                  className={styles.editButton}
+                  onClick={() => setMode(!editMode)}
+                >
+                  Edit profile
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
+            {editMode ? (
+              <>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className={styles.inputSection}>
+                    <label>Description</label>
+                    <textarea
+                      className={styles.inputField}
+                      {...register("description")}
+                    />
+                  </div>
+                  <br />
+                  <div className={styles.inputSection}>
+                    <label>Interests</label>
+                    <textarea
+                      className={styles.inputField}
+                      {...register("interests")}
+                    />
+                  </div>
+                  <button className={styles.submitButton} type="submit">
+                    Apply
+                  </button>
+                </form>
               </>
             ) : (
               <></>

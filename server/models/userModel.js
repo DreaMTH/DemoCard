@@ -22,7 +22,7 @@ export default mongoose.model(
         required: false,
       },
       interests: {
-        type: String,
+        type: Array,
         required: false,
       },
     },
