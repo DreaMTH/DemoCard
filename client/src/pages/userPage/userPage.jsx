@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import User from "../../components/User";
 import { useForm } from "react-hook-form";
 const UserPage = () => {
+  let interestList;
   const [editMode, setMode] = useState(false);
   const authPassed = useSelector(isAuth);
   const userData = useSelector((state) => state.auth.data);
@@ -18,25 +19,33 @@ const UserPage = () => {
     mode: "onBlur",
   });
   const onSubmit = (values) => {
+    setLoading(true);
     if (!values) return;
     if (!values.interests || !values.interests.trim())
       return axios
         .post("/users/updateDescription", { description: values.description })
-        .then((response) => console.log(response))
+        .then((response) => {
+          setData(response.data);
+          setLoading(false);
+        })
         .catch((err) => console.error(err));
     if (!values.description || !values.description.trim())
       return axios
         .post("/users/updateInterests", { interests: values.interests })
-        .then((response) => console.log(response))
+        .then((response) => {
+          setData(response.data);
+          setLoading(false);
+        })
         .catch((err) => console.error(err));
     axios
       .post("/users/updateInterests", { interests: values.interests })
-      .then((response) => console.log(response))
+      .then((response) => setData(response.data))
       .catch((err) => console.error(err));
     axios
       .post("/users/updateDescription", { description: values.description })
-      .then((response) => console.log(response))
+      .then((response) => setData(response.data))
       .catch((err) => console.error(err));
+    setLoading(false);
   };
   useEffect(() => {
     axios
@@ -49,6 +58,7 @@ const UserPage = () => {
   }, [id]);
   if (!isLoading) {
     document.title = data.name;
+    interestList = data.interests.map((interest) => <li>{interest}</li>);
   }
   if (!authPassed) {
     return (
@@ -61,7 +71,12 @@ const UserPage = () => {
     <>
       <div className={styles.rootUser}>
         {isLoading ? (
-          <User id="1" name="loading..." email="loading..." />
+          <User
+            id="1"
+            name="loading..."
+            email="loading..."
+            interests={Array(5).fill("...")}
+          />
         ) : (
           <>
             <User
@@ -69,7 +84,11 @@ const UserPage = () => {
               name={data.name}
               email={data.email}
               description={data.description ?? "No description yet."}
-              interests={data.interests.length > 0 ? data.interests : Array(5).fill('...')}
+              interests={
+                data.interests.length > 0
+                  ? data.interests
+                  : Array(5).fill("...")
+              }
               shortForm={false}
               editMode={editMode}
             />

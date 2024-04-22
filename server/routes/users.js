@@ -28,42 +28,52 @@ route.get("/:id", checkAuth, async (req, res) => {
 });
 
 route.post("/updateDescription", checkAuth, async (req, res) => {
-  const user = await userModel.findByIdAndUpdate(req.userId, {
-    description: req.body.description,
-  });
+  const user = await userModel.findByIdAndUpdate(
+    req.userId,
+    {
+      description: req.body.description,
+    },
+    { new: true },
+  );
   if (!user) {
     return res.status(404).json({ message: "Invalid request" });
   } else {
-    res.status(200).json({ message: "success" });
+    res.status(200).json(user);
   }
 });
 
 route.post("/updateInterests", checkAuth, async (req, res) => {
   try {
-    const user = await userModel.findByIdAndUpdate(req.userId, {
-      $push: {
-        interests: req.body.interests,
-      }
-    }, {new: true});
+    const user = await userModel.findByIdAndUpdate(
+      req.userId,
+      {
+        $push: {
+          interests: req.body.interests,
+        },
+      },
+      { new: true },
+    );
     if (!user) {
       return res.status(404).json({ message: "Invalid request" });
     } else {
-      res.status(200).json({ message: "successs" });
+      res.status(200).json(user);
     }
   } catch (err) {
     return res.status(400).json({ message: "Wrong data" });
   }
 });
 //TEST ROUTE
-route.get("/:id/interests", async(req, res) => {
-  const { interests } = await userModel.findById(req.params.id, "interests -_id");
-  if(!interests){
+route.get("/:id/interests", async (req, res) => {
+  const { interests } = await userModel.findById(
+    req.params.id,
+    "interests -_id",
+  );
+  if (!interests) {
     return res.send("Nothing was found");
-  }
-  else {
-    let response = '';
-    for(const interest of interests) {
-      response += interest + '\r\n';
+  } else {
+    let response = "";
+    for (const interest of interests) {
+      response += interest + "\r\n";
     }
     res.send(response);
   }
