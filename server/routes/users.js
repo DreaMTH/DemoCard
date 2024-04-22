@@ -1,4 +1,4 @@
-import express from "express";
+import express, { json } from "express";
 import checkAuth from "../utils/checkAuth.js";
 import userModel from "../models/userModel.js";
 import { Mongoose, isValidObjectId } from "mongoose";
@@ -41,8 +41,10 @@ route.post("/updateDescription", checkAuth, async (req, res) => {
 route.post("/updateInterests", checkAuth, async (req, res) => {
   try {
     const user = await userModel.findByIdAndUpdate(req.userId, {
-      interests: req.body.interests,
-    });
+      $push: {
+        interests: req.body.interests,
+      }
+    }, {new: true});
     if (!user) {
       return res.status(404).json({ message: "Invalid request" });
     } else {
@@ -52,5 +54,18 @@ route.post("/updateInterests", checkAuth, async (req, res) => {
     return res.status(400).json({ message: "Wrong data" });
   }
 });
-
+//TEST ROUTE
+route.get("/:id/interests", async(req, res) => {
+  const { interests } = await userModel.findById(req.params.id, "interests -_id");
+  if(!interests){
+    return res.send("Nothing was found");
+  }
+  else {
+    let response = '';
+    for(const interest of interests) {
+      response += interest + '\r\n';
+    }
+    res.send(response);
+  }
+});
 export default route;

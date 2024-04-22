@@ -46,7 +46,7 @@ const UserPage = () => {
         setLoading(false);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [id]);
   if (!isLoading) {
     document.title = data.name;
   }
@@ -68,8 +68,8 @@ const UserPage = () => {
               id={data._id}
               name={data.name}
               email={data.email}
-              description={data.description ?? ""}
-              interests={data.interests ?? ""}
+              description={data.description ?? "No description yet."}
+              interests={data.interests.length > 0 ? data.interests : Array(5).fill('...')}
               shortForm={false}
               editMode={editMode}
             />

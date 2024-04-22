@@ -1,6 +1,10 @@
 import styles from "./User.module.css";
 import logo from "../pages/homePage/logo.png";
 const User = (props) => {
+  let itemsList;
+  if(!props.shortForm)
+    itemsList = props.interests.map(interest => (
+      <li>{interest}</li>));
   return (
     <>
       <div className={styles.root}>
@@ -17,7 +21,7 @@ const User = (props) => {
           <>
             <div className="">
               <p>{props.description}</p>
-              <h3>{props.interests}</h3>
+              <ul>{itemsList}</ul>
             </div>
           </>
         ) : (

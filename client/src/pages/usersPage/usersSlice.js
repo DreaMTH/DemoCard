@@ -11,7 +11,9 @@ export const usersSlice = createSlice({
     users: [],
     status: "loading",
   },
-  reducers: {},
+  reducers: {
+    userById: (state, id) => { return state.data.users.find(user => user._id === id)},
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.pending, (state) => {
@@ -29,3 +31,4 @@ export const usersSlice = createSlice({
   },
 });
 export const usersReducer = usersSlice.reducer;
+export const { userById } = usersSlice.actions;
